@@ -18,21 +18,18 @@ public class EnemyIdleState : EnemyBaseState
   public override void Exit() { }
   public override void Tick(float deltaTime)
   {
-    if (!CanAttack())
+    stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime);
+    if (remIdleDuration <= 0.0f)
     {
-      stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime);
-      if (remIdleDuration <= 0.0f)
-      {
-        stateMachine.SwitchState(new EnemyPatrolState(stateMachine));
-        return;
-      }
-      if (IsInChaseRange() && PlayerInsideMaxChasingRange())
-      {
-        stateMachine.SwitchState(new EnemyPatrolState(stateMachine));
-        return;
-      }
-      remIdleDuration -= deltaTime;
-      stateMachine.Animator.SetFloat(MOVEMENT, 0.0f, DAMP_TIME, deltaTime);
+      stateMachine.SwitchState(new EnemyPatrolState(stateMachine));
+      return;
     }
+    if (IsInChaseRange() && PlayerInsideMaxChasingRange())
+    {
+      stateMachine.SwitchState(new EnemyPatrolState(stateMachine));
+      return;
+    }
+    remIdleDuration -= deltaTime;
+    stateMachine.Animator.SetFloat(MOVEMENT, 0.0f, DAMP_TIME, deltaTime);
   }
 }

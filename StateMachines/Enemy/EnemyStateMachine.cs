@@ -26,7 +26,6 @@ public class EnemyStateMachine : StateMachine, ISaveable
   [field: SerializeField] public float MaxChasingRange { get; private set; } = 30.0f;
   [field: SerializeField] public bool IsArcher { get; private set; } = false;
   [field: SerializeField] public bool IsMage { get; private set; } = false;
-  [field: SerializeField] public float AttackCD { get; private set; } = 2.0f;
   [field: SerializeField] public EnemyAttack[] Attacks { get; private set; }
   public GameObject Player { get; private set; }
   public Vector3 StartingPosition { get; private set; }
@@ -34,6 +33,7 @@ public class EnemyStateMachine : StateMachine, ISaveable
   public bool HasIncreaseMaxChasingRange { get; private set; } = false;
   public bool IsReturningToStart { get; private set; } = false;
   public bool IsBlockImpact { get; private set; } = false;
+  public float BaseCD { get; private set; }
   public float CurrAttackCD { get; private set; }
   private void OnEnable()
   {
@@ -47,8 +47,6 @@ public class EnemyStateMachine : StateMachine, ISaveable
   }
   private void Start()
   {
-    CurrAttackCD = AttackCD;
-
     Player = GameObject.FindGameObjectWithTag("Player");
 
     Agent.updatePosition = false;
@@ -127,5 +125,6 @@ public class EnemyStateMachine : StateMachine, ISaveable
   }
   public void SetIsReturningToStart(bool status) { IsReturningToStart = status; }
   public void SetIsBlockImpact(bool status) { IsBlockImpact = status; }
-  public void SetCurrAttackCD(float value) { CurrAttackCD = value; Debug.Log(CurrAttackCD); }
+  public void SetCurrAttackCD(float value) { CurrAttackCD = value; }
+  public void SetBaseCD(float value) { BaseCD = value; }
 }

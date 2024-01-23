@@ -23,6 +23,8 @@ public class EnemyChasingState : EnemyBaseState
   {
     if (!CanAttack()) { stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime); }
 
+    Debug.Log("HERE");
+
     MoveToPlayer(deltaTime);
     FaceLocation(stateMachine.Player.transform.position);
 
@@ -43,9 +45,18 @@ public class EnemyChasingState : EnemyBaseState
     {
       if (!CanAttack())
       {
-        // if (Random.Range(0, 2) == 0) { stateMachine.SwitchState(new EnemyDodgeState(stateMachine)); }
-        // else { stateMachine.SwitchState(new EnemyBlockState(stateMachine)); }
-        stateMachine.SwitchState(new EnemyBlockState(stateMachine));
+        switch (Random.Range(0, 3))
+        {
+          case 0:
+            stateMachine.SwitchState(new EnemyDodgeState(stateMachine));
+            break;
+          case 1:
+            stateMachine.SwitchState(new EnemyBlockState(stateMachine));
+            break;
+          default:
+            stateMachine.SwitchState(new EnemyStrafeState(stateMachine));
+            break;
+        }
       }
       else if (stateMachine.IsArcher) { stateMachine.SwitchState(new EnemyBowState(stateMachine)); }
       else if (stateMachine.IsMage) { stateMachine.SwitchState(new EnemyMageState(stateMachine)); }

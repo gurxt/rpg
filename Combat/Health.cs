@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
 
     health = Mathf.Max(health - damage, 0);
     OnTakeDamage?.Invoke();
-    Debug.Log(health);
+    //Debug.Log(health);
 
     if (IsDead) { OnDie?.Invoke(); }
   }

@@ -83,8 +83,13 @@ public abstract class EnemyBaseState : State
   }
   protected bool CanAttack()
   {
-    if (stateMachine.CurrAttackCD <= 0.0f) { stateMachine.SetCurrAttackCD(stateMachine.AttackCD); return true; }
-    else if (stateMachine.CurrAttackCD == stateMachine.AttackCD) { return true; }
+    if (stateMachine.CurrAttackCD <= 0.0f)
+    {
+      stateMachine.SetBaseCD(2.0f); // ! CD values must be greater than blocking and dodging animations.
+      stateMachine.SetCurrAttackCD(stateMachine.BaseCD);
+      return true;
+    }
+    else if (stateMachine.CurrAttackCD == stateMachine.BaseCD) { return true; }
     return false;
   }
 }

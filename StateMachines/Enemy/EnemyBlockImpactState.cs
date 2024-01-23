@@ -13,15 +13,22 @@ public class EnemyBlockImpactState : EnemyBaseState
     stateMachine.Animator.CrossFadeInFixedTime(BLOCK_IMPACT, CROSS_FADE_TIME);
     normalized = stateMachine.Animator.GetCurrentAnimatorStateInfo(0).length;
   }
-  public override void Exit() { }
+  public override void Exit()
+  {
+    if (stateMachine.Agent.isOnNavMesh)
+    {
+      stateMachine.Agent.ResetPath();
+      stateMachine.Agent.velocity = Vector3.zero;
+    }
+  }
   public override void Tick(float deltaTime)
   {
     if (!CanAttack()) { stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime); }
     normalized -= deltaTime;
     if (normalized <= 0.0f)
     {
-      stateMachine.SwitchState(new EnemyPatrolState(stateMachine));
       stateMachine.SetIsBlockImpact(false);
+      stateMachine.SwitchState(new EnemyPatrolState(stateMachine));
     }
   }
 }
