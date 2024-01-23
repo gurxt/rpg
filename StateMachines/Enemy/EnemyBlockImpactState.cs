@@ -15,11 +15,7 @@ public class EnemyBlockImpactState : EnemyBaseState
   }
   public override void Exit()
   {
-    if (stateMachine.Agent.isOnNavMesh)
-    {
-      stateMachine.Agent.ResetPath();
-      stateMachine.Agent.velocity = Vector3.zero;
-    }
+    if (stateMachine.BlockingCollider) { stateMachine.BlockingCollider.enabled = false; }
   }
   public override void Tick(float deltaTime)
   {

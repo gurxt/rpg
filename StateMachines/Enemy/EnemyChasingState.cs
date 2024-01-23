@@ -23,8 +23,6 @@ public class EnemyChasingState : EnemyBaseState
   {
     if (!CanAttack()) { stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime); }
 
-    Debug.Log("HERE");
-
     MoveToPlayer(deltaTime);
     FaceLocation(stateMachine.Player.transform.position);
 
@@ -43,7 +41,7 @@ public class EnemyChasingState : EnemyBaseState
     }
     else if (IsInAttackRange())
     {
-      if (!CanAttack())
+      if (!CanAttack() && !stateMachine.IsArcher && !stateMachine.IsMage)
       {
         switch (Random.Range(0, 3))
         {

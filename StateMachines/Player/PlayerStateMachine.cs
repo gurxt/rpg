@@ -101,18 +101,18 @@ public class PlayerStateMachine : StateMachine, ISaveable
     Health.OnTakeDamage += HandleTakeDamage;
     Health.OnDie += HandleDeath;
   }
+  private void OnDisable()
+  {
+    Input.SwapWeaponsEvent -= HandleSwapWeapons;
+    Health.OnTakeDamage -= HandleTakeDamage;
+    Health.OnDie -= HandleDeath;
+  }
   private void HandleSwapWeapons()
   {
     if (InAttackAnimation) { return; }
     if (SecondaryWeaponIndex == -1) { return; }
     (SecondaryWeaponIndex, PrimaryWeaponIndex) = (PrimaryWeaponIndex, SecondaryWeaponIndex);
     SetActiveWeapon(PrimaryWeaponIndex, SecondaryWeaponIndex);
-  }
-  private void OnDisable()
-  {
-    Input.SwapWeaponsEvent -= HandleSwapWeapons;
-    Health.OnTakeDamage -= HandleTakeDamage;
-    Health.OnDie -= HandleDeath;
   }
   private void HandleTakeDamage() { SwitchState(new PlayerImpactState(this)); }
   private void HandleDeath() { SwitchState(new PlayerDeadState(this, true)); }

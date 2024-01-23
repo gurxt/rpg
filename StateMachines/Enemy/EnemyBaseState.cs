@@ -85,7 +85,7 @@ public abstract class EnemyBaseState : State
   {
     if (stateMachine.CurrAttackCD <= 0.0f)
     {
-      stateMachine.SetBaseCD(2.0f); // ! CD values must be greater than blocking and dodging animations.
+      stateMachine.SetBaseCD(Random.Range(0.5f, 2.0f)); // ! CD values must be greater than blocking and dodging animations.
       stateMachine.SetCurrAttackCD(stateMachine.BaseCD);
       return true;
     }

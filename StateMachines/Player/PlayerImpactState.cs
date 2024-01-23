@@ -12,11 +12,26 @@ public class PlayerImpactState : PlayerBaseState
   public PlayerImpactState(PlayerStateMachine stateMachine) : base(stateMachine)
   {
     duration = stateMachine.KnockbackDuration;
+    stateMachine.GetComponent<WeaponHandler>()?.DisableWeapon();
   }
   public override void Enter()
   {
-    stateMachine.Animator.CrossFadeInFixedTime(IMPACT_ONE, CROSS_FADE_TIME);
+    int rand = Random.Range(0, 3);
+    switch (rand)
+    {
+      case 0:
+        stateMachine.Animator.CrossFadeInFixedTime(IMPACT_ONE, CROSS_FADE_TIME);
+        break;
+      case 1:
+        stateMachine.Animator.CrossFadeInFixedTime(IMPACT_TWO, CROSS_FADE_TIME);
+        break;
+      default:
+        stateMachine.Animator.CrossFadeInFixedTime(IMPACT_THREE, CROSS_FADE_TIME);
+        break;
+    }
+
   }
+
   public override void Exit() { }
   public override void Tick(float deltaTime)
   {
@@ -24,17 +39,16 @@ public class PlayerImpactState : PlayerBaseState
 
     duration -= deltaTime;
 
-    if (duration <= 0.0f)
+    if (duration > 0.0f) { return; }
+
+    if (stateMachine.PrimaryWeaponIndex == 1)
     {
-      if (stateMachine.PrimaryWeaponIndex == 1)
-      {
-        stateMachine.Input.IsBowDraw = false;
-        stateMachine.SwitchState(new PlayerBowState(stateMachine));
-      }
-      else
-      {
-        stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
-      }
+      stateMachine.Input.IsBowDraw = false;
+      stateMachine.SwitchState(new PlayerBowState(stateMachine));
+    }
+    else
+    {
+      stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
     }
   }
 }

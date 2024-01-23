@@ -51,21 +51,10 @@ public class PlayerAttackingState : PlayerBaseState
     if (!IsControlEnabled()) { stateMachine.SwitchState(new PlayerFreeLookState(stateMachine)); }
 
     Move(deltaTime);
+    FaceMovementDirection(deltaTime);
 
-    if (isAttacking)
-    {
-      if (!AttackTick())
-      {
-        SwitchToBowOrFreeLookState();
-      }
-    }
-    else
-    {
-      if (!AbilityTick())
-      {
-        SwitchToBowOrFreeLookState();
-      }
-    }
+    if (isAttacking && !AttackTick()) { SwitchToBowOrFreeLookState(); }
+    else if (!isAttacking && !AbilityTick()) { SwitchToBowOrFreeLookState(); }
 
   }
   private bool AbilityTick()

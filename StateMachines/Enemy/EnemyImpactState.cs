@@ -13,6 +13,7 @@ public class EnemyImpactState : EnemyBaseState
   }
   public override void Enter()
   {
+    stateMachine.GetComponent<WeaponHandler>()?.DisableWeapon();
     stateMachine.Animator.CrossFadeInFixedTime(
       Random.Range(0, 2) == 0 ? IMPACT_ONE : IMPACT_TWO,
       CROSS_FADE_TIME
