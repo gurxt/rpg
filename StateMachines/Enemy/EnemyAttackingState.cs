@@ -30,7 +30,7 @@ public class EnemyAttackingState : EnemyBaseState
   }
   public override void Enter()
   {
-    stateMachine.CurrAttackCD -= 0.01f;
+    stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - 0.01f);
     stateMachine.Animator.CrossFadeInFixedTime(CURR_ATTACK_ANIMATOR, CROSS_FADE_TIME);
     stateMachine.Weapon.SetAttack(currAttack.AttackDamage, currAttack.Knockback);
   }

@@ -18,10 +18,10 @@ public class EnemyBlockState : EnemyBaseState
   }
   public override void Tick(float deltaTime)
   {
-    if (!CanAttack()) { stateMachine.CurrAttackCD -= deltaTime; }
+    if (!CanAttack()) { stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime); }
     FaceLocation(stateMachine.Player.transform.position);
 
-    if (stateMachine.BlockImpact) { stateMachine.SwitchState(new EnemyBlockImpactState(stateMachine)); }
+    if (stateMachine.IsBlockImpact) { stateMachine.SwitchState(new EnemyBlockImpactState(stateMachine)); }
 
     if (stateMachine.BlockingCollider) { stateMachine.BlockingCollider.enabled = true; }
     normalized -= deltaTime;

@@ -68,7 +68,7 @@ public abstract class EnemyBaseState : State
     bool status = Vector3.Distance(stateMachine.transform.position, stateMachine.StartingPosition) < 0.1f;
     if (status)
     {
-      stateMachine.IsReturningToStart = false;
+      stateMachine.SetIsReturningToStart(false);
     }
     return status;
   }
@@ -83,7 +83,7 @@ public abstract class EnemyBaseState : State
   }
   protected bool CanAttack()
   {
-    if (stateMachine.CurrAttackCD <= 0.0f) { stateMachine.CurrAttackCD = stateMachine.AttackCD; return true; }
+    if (stateMachine.CurrAttackCD <= 0.0f) { stateMachine.SetCurrAttackCD(stateMachine.AttackCD); return true; }
     else if (stateMachine.CurrAttackCD == stateMachine.AttackCD) { return true; }
     return false;
   }

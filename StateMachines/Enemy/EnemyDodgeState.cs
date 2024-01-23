@@ -38,7 +38,7 @@ public class EnemyDodgeState : EnemyBaseState
   public override void Exit() { }
   public override void Tick(float deltaTime)
   {
-    if (!CanAttack()) { stateMachine.CurrAttackCD -= deltaTime; }
+    if (!CanAttack()) { stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime); }
 
     FaceLocation(stateMachine.Player.transform.position);
     if (stateMachine.Agent.isOnNavMesh) { Move(direction, deltaTime); }

@@ -21,7 +21,7 @@ public class EnemyChasingState : EnemyBaseState
   }
   public override void Tick(float deltaTime)
   {
-    if (!CanAttack()) { stateMachine.CurrAttackCD -= deltaTime; }
+    if (!CanAttack()) { stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime); }
 
     MoveToPlayer(deltaTime);
     FaceLocation(stateMachine.Player.transform.position);
@@ -32,7 +32,7 @@ public class EnemyChasingState : EnemyBaseState
 
     if (IsInChaseRange() && !IsInsideOfMaxChasingRange())
     {
-      stateMachine.IsReturningToStart = true;
+      stateMachine.SetIsReturningToStart(true);
       stateMachine.SwitchState(new EnemyIdleState(stateMachine, 3.0f));
     }
     else if (!IsInChaseRange() && IsInsideOfMaxChasingRange())

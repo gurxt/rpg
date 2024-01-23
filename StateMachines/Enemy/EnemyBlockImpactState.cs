@@ -16,12 +16,12 @@ public class EnemyBlockImpactState : EnemyBaseState
   public override void Exit() { }
   public override void Tick(float deltaTime)
   {
-    if (!CanAttack()) { stateMachine.CurrAttackCD -= deltaTime; }
+    if (!CanAttack()) { stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime); }
     normalized -= deltaTime;
     if (normalized <= 0.0f)
     {
       stateMachine.SwitchState(new EnemyPatrolState(stateMachine));
-      stateMachine.BlockImpact = false;
+      stateMachine.SetIsBlockImpact(false);
     }
   }
 }

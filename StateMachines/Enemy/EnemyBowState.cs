@@ -23,7 +23,7 @@ public class EnemyBowState : EnemyBaseState
     stateMachine.Animator.SetFloat(BOW_STATE, duration, 0.1f, deltaTime);
     if (duration >= 0.5f && !hasFired)
     {
-      stateMachine.CurrAttackCD -= 0.01f;
+      stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - 0.01f);
       UnityEngine.GameObject arrowInstance = UnityEngine.GameObject.Instantiate(
         stateMachine.EnemyArrowProjectile,
         stateMachine.RightHand.transform.position,

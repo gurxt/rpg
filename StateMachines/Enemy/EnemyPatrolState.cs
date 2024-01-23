@@ -16,10 +16,10 @@ public class EnemyPatrolState : EnemyBaseState
   public override void Exit() { }
   public override void Tick(float deltaTime)
   {
-    if (!CanAttack()) { stateMachine.CurrAttackCD -= deltaTime; }
+    if (!CanAttack()) { stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime); }
     if (stateMachine.IsReturningToStart && PlayerInsideMaxChasingRange() && IsInsideOfMaxChasingRange())
     {
-      stateMachine.IsReturningToStart = false;
+      stateMachine.SetIsReturningToStart(false);
       stateMachine.SwitchState(new EnemyChasingState(stateMachine));
       return;
     }

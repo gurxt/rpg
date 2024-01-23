@@ -18,7 +18,7 @@ public class EnemyMageState : EnemyBaseState
     float normalizedTime = GetNormalizedTime(stateMachine.Animator, "MageAttack");
     if (normalizedTime >= 0.75f && !hasFired)
     {
-      stateMachine.CurrAttackCD -= 0.01f;
+      stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - 0.01f);
       UnityEngine.GameObject.Instantiate(
         stateMachine.MagicAttackProjectile,
         stateMachine.RightHand.transform.position,

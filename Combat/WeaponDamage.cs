@@ -27,7 +27,7 @@ public class WeaponDamage : MonoBehaviour
 
     if (other.name == "Enemy" && other.GetComponent<BoxCollider>().enabled == true)
     {
-      other.GetComponent<EnemyStateMachine>().BlockImpact = true;
+      other.GetComponent<EnemyStateMachine>().SetIsBlockImpact(true);
       collidedWithShield = true;
       return;
     }

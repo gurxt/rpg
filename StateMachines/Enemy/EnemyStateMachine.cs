@@ -32,9 +32,9 @@ public class EnemyStateMachine : StateMachine, ISaveable
   public Vector3 StartingPosition { get; private set; }
   public bool HasIncreasedChasingRange { get; private set; } = false;
   public bool HasIncreaseMaxChasingRange { get; private set; } = false;
-  public bool IsReturningToStart = false;
-  public bool BlockImpact = false;
-  public float CurrAttackCD;
+  public bool IsReturningToStart { get; private set; } = false;
+  public bool IsBlockImpact { get; private set; } = false;
+  public float CurrAttackCD { get; private set; }
   private void OnEnable()
   {
     Health.OnTakeDamage += HandleTakeDamage;
@@ -125,4 +125,7 @@ public class EnemyStateMachine : StateMachine, ISaveable
       SwitchState(new EnemyPatrolState(this));
     }
   }
+  public void SetIsReturningToStart(bool status) { IsReturningToStart = status; }
+  public void SetIsBlockImpact(bool status) { IsBlockImpact = status; }
+  public void SetCurrAttackCD(float value) { CurrAttackCD = value; Debug.Log(CurrAttackCD); }
 }

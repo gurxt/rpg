@@ -21,7 +21,7 @@ public class EnemyImpactState : EnemyBaseState
   public override void Exit() { }
   public override void Tick(float deltaTime)
   {
-    if (!CanAttack()) { stateMachine.CurrAttackCD -= deltaTime; }
+    if (!CanAttack()) { stateMachine.SetCurrAttackCD(stateMachine.CurrAttackCD - deltaTime); }
     MoveToPlayer(deltaTime / 100);
 
     if (!IsInChaseRange())
