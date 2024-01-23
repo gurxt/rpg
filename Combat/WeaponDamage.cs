@@ -25,11 +25,19 @@ public class WeaponDamage : MonoBehaviour
 
     alreadyCollidedWith.Add(other);
 
+    if (other.name == "Enemy" && other.GetComponent<BoxCollider>().enabled == true)
+    {
+      other.GetComponent<EnemyStateMachine>().BlockImpact = true;
+      collidedWithShield = true;
+      return;
+    }
+
     if (other.name == "ShieldLogic")
     {
       collidedWithShield = true;
       return;
     }
+
     if (other.TryGetComponent<ForceReceiver>(out ForceReceiver forceReceiver))
     {
       Vector3 direction = (other.transform.position - myCollider.transform.position).normalized;

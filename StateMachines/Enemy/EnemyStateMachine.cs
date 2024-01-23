@@ -17,6 +17,7 @@ public class EnemyStateMachine : StateMachine, ISaveable
   [field: SerializeField] public Transform RightHand { get; private set; }
   [field: SerializeField] public GameObject EnemyArrowProjectile { get; private set; } = null;
   [field: SerializeField] public GameObject MagicAttackProjectile { get; private set; } = null;
+  [field: SerializeField] public BoxCollider BlockingCollider { get; private set; } = null;
   [field: SerializeField] public float PlayerChasingRange { get; private set; }
   [field: SerializeField] public float MovementSpeed { get; private set; }
   [field: SerializeField] public float AttackRange { get; private set; }
@@ -32,6 +33,7 @@ public class EnemyStateMachine : StateMachine, ISaveable
   public bool HasIncreasedChasingRange { get; private set; } = false;
   public bool HasIncreaseMaxChasingRange { get; private set; } = false;
   public bool IsReturningToStart = false;
+  public bool BlockImpact = false;
   public float CurrAttackCD;
   private void OnEnable()
   {

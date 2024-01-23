@@ -41,7 +41,12 @@ public class EnemyChasingState : EnemyBaseState
     }
     else if (IsInAttackRange())
     {
-      if (!CanAttack()) { stateMachine.SwitchState(new EnemyDodgeState(stateMachine)); }
+      if (!CanAttack())
+      {
+        // if (Random.Range(0, 2) == 0) { stateMachine.SwitchState(new EnemyDodgeState(stateMachine)); }
+        // else { stateMachine.SwitchState(new EnemyBlockState(stateMachine)); }
+        stateMachine.SwitchState(new EnemyBlockState(stateMachine));
+      }
       else if (stateMachine.IsArcher) { stateMachine.SwitchState(new EnemyBowState(stateMachine)); }
       else if (stateMachine.IsMage) { stateMachine.SwitchState(new EnemyMageState(stateMachine)); }
       else { stateMachine.SwitchState(new EnemyAttackingState(stateMachine)); }
