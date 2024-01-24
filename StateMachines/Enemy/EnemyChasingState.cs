@@ -39,7 +39,7 @@ public class EnemyChasingState : EnemyBaseState
     {
       stateMachine.SwitchState(new EnemyIdleState(stateMachine, 2.0f));
     }
-    else if (IsInAttackRange())
+    else if (IsInAttackRange(stateMachine.AttackRange))
     {
       if (!CanAttack() && !stateMachine.IsArcher && !stateMachine.IsMage)
       {
@@ -56,15 +56,16 @@ public class EnemyChasingState : EnemyBaseState
             break;
         }
       }
+      else if (!CanAttack() && IsInAttackRange(0.25f)) { stateMachine.SwitchState(new EnemyAttackingState(stateMachine)); }
       else if (stateMachine.IsArcher) { stateMachine.SwitchState(new EnemyBowState(stateMachine)); }
       else if (stateMachine.IsMage) { stateMachine.SwitchState(new EnemyMageState(stateMachine)); }
       else { stateMachine.SwitchState(new EnemyAttackingState(stateMachine)); }
     }
   }
-  private bool IsInAttackRange()
+  private bool IsInAttackRange(float range)
   {
     if (stateMachine.Player.GetComponent<Health>().IsDead) { return false; }
     float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
-    return playerDistanceSqr <= stateMachine.AttackRange * stateMachine.AttackRange;
+    return playerDistanceSqr <= stateMachine.AttackRange * range;
   }
 }

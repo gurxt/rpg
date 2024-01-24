@@ -8,7 +8,7 @@ public class EnemyDodgeState : EnemyBaseState
   private readonly int DODGE_BLEND_TREE = Animator.StringToHash("EnemyDodgeBlendTree");
   private readonly int DODGE_DIRECTION = Animator.StringToHash("DodgeDirection");
   private Vector3 direction = Vector3.zero;
-  private float duration = 1.0f;
+  private float duration = 0.5f;
   public EnemyDodgeState(EnemyStateMachine stateMachine) : base(stateMachine) { }
   public override void Enter()
   {

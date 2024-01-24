@@ -18,6 +18,7 @@ public class EnemyStateMachine : StateMachine, ISaveable
   [field: SerializeField] public GameObject EnemyArrowProjectile { get; private set; } = null;
   [field: SerializeField] public GameObject MagicAttackProjectile { get; private set; } = null;
   [field: SerializeField] public BoxCollider BlockingCollider { get; private set; } = null;
+  [field: SerializeField] public GameObject KickAttackObject { get; private set; } = null;
   [field: SerializeField] public float PlayerChasingRange { get; private set; }
   [field: SerializeField] public float MovementSpeed { get; private set; }
   [field: SerializeField] public float AttackRange { get; private set; }

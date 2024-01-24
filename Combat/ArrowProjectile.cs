@@ -51,6 +51,7 @@ public class ArrowProjectile : MonoBehaviour
     if (other.name.Contains("Projectile") ||
         other.gameObject.CompareTag("PlayerTargeter") ||
        (gameObject.name == "ArrowProjectile(Clone)" && other.CompareTag("Player")) ||
+       (gameObject.name == "MagicAttackProjectile(Clone)" && other.CompareTag("Enemy")) ||
        (gameObject.name == "EnemyArrowProjectile(Clone)" && other.CompareTag("Enemy"))) { return; }
 
     if (gameObject.name == "MagicAttackProjectile(Clone)") { gameObject.SetActive(false); Destroy(gameObject); }
